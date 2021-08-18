@@ -1,8 +1,13 @@
+pub mod repository;
+pub mod repositories;
+pub mod file;
+
 fn main() {
-    // initialization
-    // read text file with repositories
-    // for each repository
-        // locate folder of selected repository
-        // perform git pull for this repository
-    // dispose all resources
+    repositories::Repositories::from(
+        file::File::content(
+            String::from(
+                "repositores.txt"
+            )
+        )
+    ).pull();
 }
