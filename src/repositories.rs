@@ -20,7 +20,15 @@ impl Repositories{
     /// Construct container from string
     /// 
     pub fn from(_content: String)->Self{
-        return Self::new()
+        // todo: parsing repositories and adding 
+        // to constructed object
+        let mut repos = Self::new();
+        repos.append(
+            Repository::new(
+                "manuals", "https://github.com/JiJogbf/manuals.git", "F:\\src\\shell\\shell_rust"
+            )
+        );
+        return repos;
     }
 
     ///

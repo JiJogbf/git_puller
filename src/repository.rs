@@ -1,3 +1,5 @@
+use std::process::Command;
+
 ///
 /// Representation of real repository
 /// 
@@ -8,22 +10,37 @@ pub struct Repository{
 }
 
 impl Repository{
+
     ///
     /// Allocate repository object
     /// 
-    pub fn new(name: String, 
-        url: String, 
-        dir: String
+    pub fn new(name: &str, 
+        url: &str, 
+        dir: &str
     )->Self{
-        return Self{name, url, dir};
+        return Self{name: String::from(name), 
+            url: String::from(url), 
+            dir: String::from(dir)
+        };
     }
 
     ///
     /// Pull 
     /// 
     pub fn pull(&self){
-        // todo: go to 'dir'
-        // call git pull
-        // read error code of executed command       
+        let cmd = Command::new("git")
+                    .args(&["pull"])
+                    .output()
+                    .expect("Failed pull this");
+        let text = cmd.stdout;
+        let t = std::str::from_utf8(&text);
+        match t {
+            Ok(v) => {
+                println!("ok: {}", v)
+            }
+            Err(e) => {
+                println!("error: {}",e)
+            }
+        }
     }
 }
