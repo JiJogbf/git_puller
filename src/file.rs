@@ -33,7 +33,8 @@ impl File{
 impl std::fmt::Display for File{
 
     ///
-    /// 
+    /// Implementation of fmt method for better output 
+    /// File propertie's
     /// 
     fn fmt(&self, f:&mut std::fmt::Formatter)->std::fmt::Result{
         write!(f, "{}", self.path)
