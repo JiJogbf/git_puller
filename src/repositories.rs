@@ -25,8 +25,9 @@ impl Repositories{
         let mut repos = Self::new();
         repos.append(
             Repository::new(
-                "manuals", "https://github.com/JiJogbf/manuals.git", "F:\\src\\shell\\shell_rust"
+                "manuals", "https://github.com/JiJogbf/manuals.git", "F:\\doc\\manuals"
             )
+            
         );
         return repos;
     }
