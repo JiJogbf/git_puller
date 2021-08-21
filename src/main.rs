@@ -9,7 +9,7 @@ fn main() {
     repositories::Repositories::from(
         file::File::from(
             String::from(
-                "repositores.txt"
+                "repositories.txt"
             ).as_str()
         ).content()
     ).pull();

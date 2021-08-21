@@ -1,3 +1,6 @@
+use std::env;
+use std::fs;
+
 ///
 /// Encapsulated filepath to specific file
 /// with basic file supported operation's
@@ -19,11 +22,9 @@ impl File{
     /// assuming we dealing with text file.
     /// 
     pub fn content(&self)->String{
-        // todo: open file at _path
-        // read all text from it
-        // close file
-        // return string buffer
-        String::from("")
+        let content = fs::read_to_string(&self.path).expect("text reading failed");
+        println!("content {}", content);
+        content
     }
 }
 
