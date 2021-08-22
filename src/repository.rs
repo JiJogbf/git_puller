@@ -5,8 +5,8 @@ use std::process::Command;
 /// 
 pub struct Repository{
     name: String,
-    url: String, 
-    dir: String
+    dir: String,
+    url: String
 }
 
 impl Repository{
@@ -15,12 +15,13 @@ impl Repository{
     /// Allocate repository object
     /// 
     pub fn new(name: &str, 
-        url: &str, 
-        dir: &str
+        dir: &str, 
+        url: &str
     )->Self{
-        return Self{name: String::from(name), 
-            url: String::from(url), 
-            dir: String::from(dir)
+        return Self{
+            name: String::from(name), 
+            dir: String::from(dir), 
+            url: String::from(url)
         };
     }
 
@@ -29,17 +30,15 @@ impl Repository{
     /// 
     pub fn pull(&self){
         let cmd = Command::new("git")
-                    .args(&["pull"])
+                    .args(&["-C", &self.dir, "pull"])
                     .output()
                     .expect("Failed pull this");
-        let text = cmd.stdout;
-        let t = std::str::from_utf8(&text);
-        match t {
-            Ok(v) => {
-                println!("ok: {}", v)
-            }
-            Err(e) => {
-                println!("error: {}",e)
+        match std::str::from_utf8(&cmd.stdout) {
+            Ok(verbose) => {
+                println!("ok: '{}'", verbose)
+            },
+            Err(error) => {
+                println!("error: {}", error)
             }
         }
     }

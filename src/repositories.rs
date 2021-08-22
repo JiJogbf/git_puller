@@ -23,12 +23,14 @@ impl Repositories{
         // todo: parsing repositories and adding 
         // to constructed object
         let mut repos = Self::new();
-        repos.append(
-            Repository::new(
-                "manuals", "https://github.com/JiJogbf/manuals.git", "F:\\doc\\manuals"
-            )
-            
-        );
+        let lines = split_to_lines(&_content.as_str(), "\n");
+        for line in lines.iter(){
+            let items = split_to_lines(&line, " ");
+            repos.append(
+                Repository::new(&items[0], &items[1], &items[2])
+            );         
+        }
+   
         return repos;
     }
 
@@ -47,4 +49,10 @@ impl Repositories{
             repo.pull();
         }
     }
+}
+
+fn split_to_lines(content: &str, something: &str)->Vec<String>{
+    return content.split(something)
+        .map(|s| s.to_string())
+        .collect();
 }
