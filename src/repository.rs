@@ -35,7 +35,7 @@ impl Repository{
                     .expect("Failed pull this");
         match std::str::from_utf8(&cmd.stdout) {
             Ok(verbose) => {
-                println!("ok: '{}'", verbose)
+                println!("ok: {}", verbose)
             },
             Err(error) => {
                 println!("error: {}", error)

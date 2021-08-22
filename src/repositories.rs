@@ -27,7 +27,11 @@ impl Repositories{
         for line in lines.iter(){
             let items = split_to_lines(&line, " ");
             repos.append(
-                Repository::new(&items[0], &items[1], &items[2])
+                Repository::new(
+                    without_braces(&items[0]), 
+                    without_braces(&items[1]),
+                    without_braces(&items[2])
+                )
             );         
         }
    
@@ -50,6 +54,16 @@ impl Repositories{
         }
     }
 }
+
+fn without_braces(source: &str)->&str{
+    // удалить сначала кавычку и потом так же 
+    // удалить кавычку 
+    let mut chars = source.chars();
+    chars.next();
+    chars.next_back();
+    chars.as_str()
+}
+
 
 fn split_to_lines(content: &str, something: &str)->Vec<String>{
     return content.split(something)
