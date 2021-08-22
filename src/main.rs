@@ -8,9 +8,7 @@ pub mod file;
 fn main() {
     repositories::Repositories::from(
         file::File::from(
-            String::from(
-                "repositories.txt"
-            ).as_str()
+            "repositories.txt"
         ).content()
     ).pull();
 }

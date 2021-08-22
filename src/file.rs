@@ -1,4 +1,3 @@
-use std::env;
 use std::fs;
 
 ///
@@ -21,10 +20,17 @@ impl File{
     /// Reading all availalbe string content from file 
     /// assuming we dealing with text file.
     /// 
-    pub fn content(&self)->String{
-        let content = fs::read_to_string(&self.path).expect("text reading failed");
-        println!("content {}", content);
-        content
+    pub fn content(&self)->String{ 
+        match fs::read_to_string(&self.path) {
+            Ok(text) => {
+                println!("text={}", text);
+                text
+            },
+            Err(error) => {
+                println!("error: {}", error);
+                String::from("")
+            }
+        }
     }
 }
 
@@ -41,3 +47,4 @@ impl std::fmt::Display for File{
         write!(f, "{}", self.path)
     }
 }
+
