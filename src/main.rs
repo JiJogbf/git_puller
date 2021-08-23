@@ -1,6 +1,7 @@
 pub mod repository;
 pub mod repositories;
 pub mod file;
+pub mod utils;
 
 ///
 /// Entry point 

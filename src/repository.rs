@@ -1,4 +1,5 @@
 use std::process::Command;
+use super::utils::{*};
 
 ///
 /// Representation of real repository
@@ -23,6 +24,13 @@ impl Repository{
             dir: String::from(dir), 
             url: String::from(url)
         };
+    }
+
+    pub fn from(line: &str)->Self{
+        let items = split_to_lines(&line, " ");
+        // TODO: parse line to three items and 
+        // store items to fileds of this Repositories
+        Self::new(without_braces(&items[0]), without_braces(&items[1]),without_braces(&items[2]))
     }
 
     ///
